@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrange box</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section class="section-main" id="app">
+        <div class="container">
+            <p class="title">{{title}}</p>
+
+            <div class="container-input">
+                <input type="text" class="name" v-model="currentValue">
+                <input type="number" class="count" v-model="countValue">
+                <button class="add" @click="addNote">добавить</button>
+            </div>
+
+            <div class="container-box">
+                <ul class="right-content">
+                    <li class="container-left" v-for="(note, index) in notes_left"
+                        :class="['container-left', {'change-background-left': selectedIndex==index}]"
+                        @click="selectedIndex = index">
+                        <p>{{note.name}}</p>
+                        <p class="counter">{{note.count}}</p>
+
+                        <button class="remove" @click="removeNote(index,$event)">x</button>
+                    </li>
+                </ul>
+
+                <div class="swap">
+                    <p class="left" @click = "moveNoteRight">▶️</p>
+                    <p class="right" @click = "moveNoteLeft">◀️</p> 
+                </div>
+
+                <ul class="right-content">
+                    <li class="container-right" v-for="(note, index) in notes_right"  v-for="(note, index) in notes_left"
+                    :class="['container-right', {'change-background-right': selectedIndex==index}]"
+                    @click="selectedIndex = index">
+                        <p>{{note.name}}</p>
+                        <p class="counter">{{note.count}}</p>
+
+                    </li>
+                </ul>
+            </div>
+
+            <div class="count-elements">
+                <p class="count-elem">{{countNote}}</p>
+            </div>
+
+        </div>
+    </section>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
